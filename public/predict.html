@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Predictions - Olist CLV</title>
+  <link rel="stylesheet" href="/css/predict.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Live Customer Predictions</h1>
+    <p class="sub">Customer ki values badlein, prediction foran update hogi.</p>
+  </div>
+  <a class="back" href="/">&larr; Dashboard</a>
+</header>
+
+<div id="banner" class="banner" hidden></div>
+
+<main class="layout">
+  <section class="card">
+    <div class="card-head">
+      <h2>Customer profile</h2>
+      <div class="btns">
+        <button id="btn-sample" class="btn primary">Random real customer</button>
+        <button id="btn-reset" class="btn">Reset</button>
+      </div>
+    </div>
+    <div id="sample-note" class="note" hidden></div>
+    <form id="form" autocomplete="off" onsubmit="return false"></form>
+  </section>
+
+  <section class="card result">
+    <h2>Prediction</h2>
+    <div id="res-empty" class="muted">Loading...</div>
+    <div id="res" hidden>
+      <div class="ring-wrap">
+        <svg viewBox="0 0 120 120" class="ring">
+          <circle cx="60" cy="60" r="50" class="ring-bg"></circle>
+          <circle id="ring-fg" cx="60" cy="60" r="50" class="ring-fg" transform="rotate(-90 60 60)"></circle>
+        </svg>
+        <div class="ring-text"><span id="r-p">0%</span><small>repeat chance</small></div>
+      </div>
+      <p id="r-lift" class="lift"></p>
+      <div class="stats">
+        <div><small>Predicted spend (if repeat)</small><b id="r-spend">-</b></div>
+        <div><small>Expected future value</small><b id="r-score">-</b></div>
+        <div><small>Segment</small><b><span id="r-seg" class="seg">-</span></b></div>
+      </div>
+      <h3>Kya cheez chance badha / ghata rahi hai?</h3>
+      <p class="muted small">Har value ko typical (median) customer jaisa karne par chance kitna badalta hai.</p>
+      <div id="drivers"></div>
+    </div>
+  </section>
+</main>
+
+<section class="card model">
+  <h2>Model info</h2>
+  <div id="model-card" class="grid-card"></div>
+  <p class="note">
+    Note: model "repeat customer" ka label predict karta hai jo notebook me observation window (2018-03-01 se pehle) se bana hai.
+    Fractional averages (jaise late_rate 0.5 ya avg_review 4.75) sirf 2+ orders wale customer me mumkin hain, is liye model inhe repeat ka
+    ishara samajhta hai. Naye (single-order) customer ke liye review/late_rate whole numbers rakhein.
+  </p>
+</section>
+
+<script src="/js/predict.js"></script>
+</body>
+</html>

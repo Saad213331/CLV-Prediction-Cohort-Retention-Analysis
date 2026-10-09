@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Olist Analytics Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="logo">O</span>
+      <div><h1>Olist Analytics</h1><p>Brazilian E-Commerce · Sep 2016 – Oct 2018</p></div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="overview">Overview</button>
+      <button class="tab" data-tab="orders">Orders</button>
+      <button class="tab" data-tab="models">ML Models</button>
+    </nav>
+    <div class="filters" id="filters">
+      <label>Year <select id="f-year"><option value="">All</option></select></label>
+      <label>State <select id="f-state"><option value="">All</option></select></label>
+    </div>
+  </header>
+
+  <main>
+    <!-- OVERVIEW -->
+    <section id="tab-overview" class="panel active">
+      <div class="kpis" id="kpis"></div>
+      <div class="grid">
+        <article class="card wide"><h2>Monthly orders &amp; revenue</h2><div id="c-monthly" class="chart"></div></article>
+        <article class="card"><h2>Top categories (orders)</h2><div id="c-cat" class="chart"></div></article>
+        <article class="card"><h2>Orders by state (top 10)</h2><div id="c-state" class="chart"></div></article>
+        <article class="card"><h2>Payment types</h2><div id="c-pay" class="chart"></div></article>
+        <article class="card"><h2>Review scores</h2><div id="c-rev" class="chart"></div></article>
+        <article class="card"><h2>Delivery time (days)</h2><div id="c-del" class="chart"></div></article>
+        <article class="card"><h2>Order status</h2><div id="c-status" class="chart"></div></article>
+      </div>
+    </section>
+
+    <!-- ORDERS -->
+    <section id="tab-orders" class="panel">
+      <div class="toolbar">
+        <input id="o-q" type="search" placeholder="Search order id or city…">
+        <select id="o-status"><option value="">All statuses</option></select>
+        <select id="o-cat"><option value="">All categories</option></select>
+        <select id="o-sort">
+          <option value="purchase">Sort: date</option>
+          <option value="payment">Sort: payment</option>
+          <option value="review">Sort: review</option>
+          <option value="delivery_days">Sort: delivery days</option>
+        </select>
+        <button id="o-dir" class="btn" title="Toggle order">↓ Desc</button>
+      </div>
+      <div class="table-wrap">
+        <table id="o-table">
+          <thead><tr><th>Order</th><th>Date</th><th>Status</th><th>City</th><th>Category</th><th class="r">Payment (R$)</th><th>Type</th><th class="r">Review</th><th class="r">Days</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="pager"><button class="btn" id="o-prev">← Prev</button><span id="o-info"></span><button class="btn" id="o-next">Next →</button></div>
+    </section>
+
+    <!-- MODELS -->
+    <section id="tab-models" class="panel">
+      <div class="note" id="m-note"></div>
+      <div class="grid">
+        <article class="card wide"><h2>Stage 1 – Repeat vs one-time customer (classification)</h2><div class="table-wrap"><table id="m-clf"></table></div></article>
+        <article class="card wide"><h2>Stage 2 – Spend amount (regression)</h2><div class="table-wrap"><table id="m-reg"></table></div></article>
+        <article class="card"><h2>Top drivers of repeat purchase</h2><div id="c-fi" class="chart"></div></article>
+        <article class="card"><h2>Data risks handled</h2><ul class="risks" id="m-risks"></ul></article>
+      </div>
+    </section>
+  </main>
+
+  <div id="tip" class="tip" hidden></div>
+  <script src="/js/charts.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
