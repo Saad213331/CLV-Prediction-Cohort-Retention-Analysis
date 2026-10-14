@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Olist CLV - Live Predictions</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Olist Customer Lifetime Value</h1>
+    <p class="sub">Repeat purchase probability, expected spend aur customer segments - live.</p>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="live">Live Prediction</button>
+    <button class="tab" data-tab="customers">Customers</button>
+    <button class="tab" data-tab="model">Model</button>
+  </nav>
+</header>
+
+<div id="banner" class="banner" hidden></div>
+
+<main>
+  <section id="tab-live" class="panel">
+    <div class="layout">
+      <div class="card">
+        <div class="card-head">
+          <h2>Customer ka pehla order</h2>
+          <div class="btns">
+            <button id="btn-sample" class="btn primary">Random real customer</button>
+            <button id="btn-reset" class="btn">Reset</button>
+          </div>
+        </div>
+        <div id="presets" class="presets"></div>
+        <div id="sample-note" class="note" hidden></div>
+        <form id="form" autocomplete="off" onsubmit="return false"></form>
+      </div>
+      <div class="card result">
+        <h2>Prediction</h2>
+        <div id="res-empty" class="muted">Loading...</div>
+        <div id="res" hidden>
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120" class="ring">
+              <circle cx="60" cy="60" r="50" class="ring-bg"></circle>
+              <circle id="ring-fg" cx="60" cy="60" r="50" class="ring-fg" transform="rotate(-90 60 60)"></circle>
+            </svg>
+            <div class="ring-text"><span id="r-p">0%</span><small>repeat chance</small></div>
+          </div>
+          <p id="r-lift" class="lift"></p>
+          <p id="r-flag" class="flag"></p>
+          <div class="stats">
+            <div><small>Predicted spend (agar repeat kare)</small><b id="r-spend">-</b></div>
+            <div><small>Expected future value</small><b id="r-score">-</b></div>
+            <div><small>Segment</small><b><span id="r-seg" class="seg">-</span></b></div>
+          </div>
+          <h3>Kya cheez chance badha / ghata rahi hai?</h3>
+          <p class="muted small">Har value ko typical customer jaisa karne par chance kitna badalta hai.</p>
+          <div id="drivers"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-customers" class="panel" hidden>
+    <div id="kpis" class="kpis"></div>
+    <div class="card">
+      <div class="filters">
+        <input id="f-search" type="search" placeholder="Customer ID search...">
+        <select id="f-segment"><option value="">Sab segments</option><option>Platinum</option><option>Gold</option><option>Silver</option><option>Bronze</option></select>
+        <select id="f-split"><option value="">Train + Test</option><option value="test">Sirf Test (held-out)</option><option value="train">Sirf Train</option></select>
+        <select id="f-sort">
+          <option value="score">Sort: CLV score</option><option value="p">Sort: Repeat chance</option>
+          <option value="spend">Sort: Predicted spend</option><option value="spent">Sort: Actual spent</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Customer</th><th>Orders</th><th>Spent</th><th>Actual repeat</th><th>Repeat chance</th><th>Pred. spend</th><th>CLV score</th><th>Segment</th><th>Split</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="pager"><button id="prev" class="btn">&larr; Prev</button><span id="page-info"></span><button id="next" class="btn">Next &rarr;</button></div>
+    </div>
+  </section>
+
+  <section id="tab-model" class="panel" hidden>
+    <div class="card"><h2>Model summary</h2><div id="model-card" class="grid-card"></div><div id="model-note" class="note"></div></div>
+    <div class="cols">
+      <div class="card"><h2>ROC curve (test)</h2><div id="roc"></div></div>
+      <div class="card"><h2>Confusion matrix (tuned threshold)</h2><div id="cm"></div></div>
+    </div>
+    <div class="cols">
+      <div class="card"><h2>Decile lift (test)</h2><p class="muted small">Decile 1 = model ke hisaab se sab se zyada chance wale customers.</p><div id="lift"></div></div>
+      <div class="card"><h2>Top feature importance</h2><div id="imp"></div></div>
+    </div>
+    <div class="cols">
+      <div class="card"><h2>Classifier comparison</h2><div id="tbl-clf" class="table-wrap"></div></div>
+      <div class="card"><h2>Spend model comparison</h2><div id="tbl-reg" class="table-wrap"></div></div>
+    </div>
+  </section>
+</main>
+<script src="/js/app.js"></script>
+</body>
+</html>
