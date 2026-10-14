@@ -1,8 +1,0 @@
-{
-  "name": "olist-dashboard",
-  "version": "1.0.0",
-  "description": "Olist Brazilian E-Commerce analytics dashboard (HTML + CSS + Node.js, zero dependencies)",
-  "main": "server.js",
-  "scripts": { "start": "node server.js" },
-  "engines": { "node": ">=16" }
-}
